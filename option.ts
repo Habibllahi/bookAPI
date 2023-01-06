@@ -1,9 +1,9 @@
 export const optionsJson = {
-    inflate: true,
-    limit: '100kb',
-    type: 'application/json'
-  };
+  inflate: true,
+  limit: "100kb",
+  type: "application/json",
+};
 
-  export const optionUrlEncode = {
-    extended: false
-  }
+export const optionUrlEncode = {
+  extended: false,
+};

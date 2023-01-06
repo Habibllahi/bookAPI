@@ -10,7 +10,7 @@ export const appDataSource = new DataSource({
   database: "book_api",
   schema: "library",
   entities: ["./entity/*.ts"],
-  synchronize:true
+  synchronize: true,
 });
 
 appDataSource

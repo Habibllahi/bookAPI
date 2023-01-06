@@ -11,12 +11,12 @@ export class BookIToBookConverter {
     return resource;
   }
 
-  public convertFromBook(entity: Book): BookI{
+  public convertFromBook(entity: Book): BookI {
     return {
-      author: entity.author != null? entity.author: "",
-      genre: entity.genre !=null? entity.genre:"",
-      title: entity.title !=null? entity.title:"",
-      id: entity.id !=null ? entity.id : "",
-    }
+      author: entity.author != null ? entity.author : "",
+      genre: entity.genre != null ? entity.genre : "",
+      title: entity.title != null ? entity.title : "",
+      id: entity.id != null ? entity.id : "",
+    };
   }
 }

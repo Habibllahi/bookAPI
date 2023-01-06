@@ -4,7 +4,8 @@ import { optionsJson, optionUrlEncode } from "./option";
 import { requestContentTypeJsonOnly } from "./middleware/OnlySupportApplicationJsonType";
 
 export const app: Application = express();
-export const port: string | number = process.env.PORT != null ? process.env.PORT : 3000;
+export const port: string | number =
+  process.env.PORT != null ? process.env.PORT : 3000;
 
 app.use(express.json(optionsJson));
 app.use(express.urlencoded(optionUrlEncode));

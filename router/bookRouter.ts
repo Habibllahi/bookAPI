@@ -14,7 +14,7 @@ bookRouter.get("/:id", (req: Request, res: Response) => {
   service
     .findById(req.params.id)
     .then((serviceData: BookResponse) => {
-      serviceData.error === undefined? res.status(200): res.status(400);
+      serviceData.error === undefined ? res.status(200) : res.status(400);
       res.json(serviceData);
     })
     .catch((err) => {
@@ -34,7 +34,7 @@ bookRouter.post("/", (req: Request, res: Response) => {
   service
     .save(book)
     .then((serviceData: BookResponse) => {
-      serviceData.error === undefined? res.status(201): res.status(400);
+      serviceData.error === undefined ? res.status(201) : res.status(400);
       res.json(serviceData);
     })
     .catch((err) => {
@@ -44,22 +44,20 @@ bookRouter.post("/", (req: Request, res: Response) => {
     });
 });
 
-bookRouter.put("/:id",(req: Request, res: Response) => {
+bookRouter.put("/:id", (req: Request, res: Response) => {
   const requestBody: BookI = req.body;
   console.log(requestBody);
   const converter = new BookIToBookConverter();
   const service = new BookServiceImpl(new BookRepositoryImpl(), converter);
-  service.updateBook(requestBody, req.params.id)
-  .then((serviceData: BookResponse) => {
-    serviceData.error === undefined? res.status(201): res.status(400);
-    res.json(serviceData);
-  })
-  .catch((err:Error) => {
-    res.status(500);
-    console.log(err);
-    res.json({ error: err });
-  });
-  
+  service
+    .updateBook(requestBody, req.params.id)
+    .then((serviceData: BookResponse) => {
+      serviceData.error === undefined ? res.status(201) : res.status(400);
+      res.json(serviceData);
+    })
+    .catch((err: Error) => {
+      res.status(500);
+      console.log(err);
+      res.json({ error: err });
+    });
 });
-
-
