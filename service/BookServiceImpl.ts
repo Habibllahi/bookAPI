@@ -2,7 +2,7 @@
 import { BookIToBookConverter } from "../converter/BookIToBookConcerter";
 import { Book } from "../entity/Book";
 import { BookRepositoryI } from "../repository/BookRepositoryI";
-import { BookI } from "../types/Book";
+import { BookI, PatchBookI } from "../types/Book";
 import { BookResponse } from "../types/BookResponse";
 import { BookServiceI } from "./BookServiceI";
 
@@ -16,6 +16,32 @@ export class BookServiceImpl implements BookServiceI {
   ) {
     this.bookRepository = bookRepository;
     this.converter = converter;
+  }
+
+  public async patchBook(book: PatchBookI, id: string): Promise<BookResponse> {
+    try {
+      const findResponse: BookResponse = await this.findById(id);
+      if (
+        findResponse.error === undefined &&
+        findResponse.result !== undefined
+      ) {
+        const existingBook: Book = findResponse.result;
+        const patchData = new Map<String, any>();
+        Object.entries(book).forEach((keyValuePair) => {
+          patchData.set(keyValuePair[0], keyValuePair[1]);
+        });
+        const patchbook = this._patchBook(existingBook, patchData);
+        patchbook.id = id;
+        return await this.save(patchbook);
+      } else {
+        return {
+          error: { message: "Book with specified ID not found" },
+        } as BookResponse;
+      }
+    } catch (err: unknown) {
+      console.log("Error saving Book", err);
+      return { error: err } as BookResponse;
+    }
   }
 
   public async findById(id: string): Promise<BookResponse> {
@@ -66,5 +92,13 @@ export class BookServiceImpl implements BookServiceI {
     } catch (err: unknown) {
       return { error: err } as BookResponse;
     }
+  }
+
+  private _patchBook(book: Book, patchData: Map<String, any>): Book {
+    if (patchData.has("title")) book.title = patchData.get("title");
+    if (patchData.has("genre")) book.genre = patchData.get("genre");
+    if (patchData.has("author")) book.author = patchData.get("author");
+    if (patchData.has("read")) book.isread = patchData.get("read");
+    return book;
   }
 }
