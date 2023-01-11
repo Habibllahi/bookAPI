@@ -22,4 +22,4 @@ RUN npm install
 EXPOSE 3000
 
 # Command for container to execute
-CMD ["nodemon","app.ts"]
+CMD ["node","./build/app.js"]
