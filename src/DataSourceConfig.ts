@@ -9,7 +9,7 @@ export const appDataSource = new DataSource({
   password: "postgres",
   database: "book_api",
   schema: "library",
-  entities: ["./entity/*.ts"],
+  entities: ["./src/entity/*.ts"],
   synchronize: true,
 });
 

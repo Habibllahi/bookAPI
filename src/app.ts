@@ -1,7 +1,8 @@
 import express, { Application } from "express";
 import { bookRouter } from "./router/bookRouter";
-import { optionsJson, optionUrlEncode } from "./option";
 import { requestContentTypeJsonOnly } from "./middleware/OnlySupportApplicationJsonType";
+import { optionsJson, optionUrlEncode } from "./option";
+
 
 export const app: Application = express();
 export const port: string | number =
