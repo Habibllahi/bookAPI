@@ -94,6 +94,15 @@ export class BookServiceImpl implements BookServiceI {
     }
   }
 
+  public async deleteById(id: String): Promise<BookResponse> {
+    try{
+      await this.bookRepository.deleteBookById(id);
+      return { message: "Delete sucessful" } as BookResponse;
+    }catch (err: unknown) {
+      return { error: err } as BookResponse;
+    }
+  }
+
   private _patchBook(book: Book, patchData: Map<String, any>): Book {
     if (patchData.has("title")) book.title = patchData.get("title");
     if (patchData.has("genre")) book.genre = patchData.get("genre");

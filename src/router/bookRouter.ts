@@ -79,3 +79,19 @@ bookRouter.patch("/:id", (req: Request, res: Response) => {
       res.json({ error: err });
     });
 });
+
+bookRouter.delete("/:id", (req: Request, res: Response) => {
+  const converter = new BookIToBookConverter();
+  const service = new BookServiceImpl(new BookRepositoryImpl(), converter);
+  service
+    .deleteById(req.params.id)
+    .then((serviceData: BookResponse) => {
+      serviceData.error === undefined ? res.status(200) : res.status(400);
+      res.json(serviceData);
+    })
+    .catch((err: Error) => {
+      res.status(500);
+      console.log(err);
+      res.json({ error: err });
+    });
+});

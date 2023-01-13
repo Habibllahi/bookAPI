@@ -7,13 +7,13 @@ LABEL org.opencontainers.image.title="Book API" \
       org.opencontainers.image.authors="@javabeanstack"
 
 # Create directory in container image for app code
-RUN mkdir -p /usr/src/bookapi
+RUN mkdir -p /usr/bookapi
 
 # Copy app code (.) to /usr/src/app in container image
-COPY . /usr/src/bookapi
+COPY . /usr/bookapi
 
 # Set working directory context
-WORKDIR /usr/src/bookapi
+WORKDIR /usr/bookapi
 
 # Install dependencies from packages.json
 RUN npm install
