@@ -9,6 +9,9 @@ LABEL org.opencontainers.image.title="Book API" \
 # Create directory in container image for app code
 RUN mkdir -p /usr/bookapi
 
+# Create directory in container image for app code
+RUN mkdir -p /usr/bookapi_volume
+
 # Copy app code (.) to /usr/src/app in container image
 COPY . /usr/bookapi
 

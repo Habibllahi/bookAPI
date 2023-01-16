@@ -1,7 +1,6 @@
 version: "2.13"
 
 services:
-
  app:
     container_name: book-api
     image: javabeanstack/book-api:v1
@@ -10,3 +9,11 @@ services:
      - 3000:3000
     extra_hosts:
       - "host.docker.internal:192.168.50.167"
+    volumes:
+      - type: volume
+        source: book_api_volume
+        target: /usr/bookapi_volume
+        volume:
+          nocopy: true
+volumes:
+  book_api_volume:
