@@ -4,9 +4,9 @@ services:
 
  app:
     container_name: book-api
-    image: e835d5892a31f8f4d5b739d74943e8536269bfddd1a5cc66dc4c77670c850c75
+    image: javabeanstack/book-api:v1
     restart: on-failure
     ports:
      - 3000:3000
     extra_hosts:
-      - "host.docker.internal:192.168.0.139"
+      - "host.docker.internal:192.168.50.167"
